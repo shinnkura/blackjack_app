@@ -15,11 +15,6 @@ class CardTemplate extends StatelessWidget {
     required this.color,
     required this.number,
   });
-  // CardTemplate({
-  //   this.suit = const Icon(Icons.favorite), // デフォルト値としてアイコンを設定
-  //   this.color = Colors.black, // デフォルト値として黒色を設定
-  //   this.number = '1', // デフォルト値として'0'を設定
-  // });
 
   @override
   Widget build(BuildContext context) {

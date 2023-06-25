@@ -69,6 +69,11 @@ class _HomePageState extends State<HomePage>
                   number: '3',
                   suit: diamond(),
                 ),
+                CardTemplate(
+                  color: Colors.black,
+                  number: 'K',
+                  suit: spade(),
+                ),
                 getFlippingCard("A", diamond(), Colors.red),
               ],
             ),
@@ -98,11 +103,12 @@ class _HomePageState extends State<HomePage>
                 number: number,
                 suit: suit,
               )
-            : CardTemplate(
-                color: color,
-                number: number,
-                suit: suit,
-              ),
+            : CardBack(),
+        // : CardTemplate(
+        //     color: color,
+        //     number: number,
+        //     suit: suit,
+        //   ),
       ),
     );
   }
