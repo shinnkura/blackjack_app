@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CardTemplate extends StatelessWidget {
-  // final suit;
-  // final color;
-  // final number;
-
   final Widget suit;
   final Color color;
   final String number;

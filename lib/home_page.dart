@@ -1,6 +1,6 @@
-import 'package:blackjack_app/card.dart';
-import 'package:blackjack_app/card_template.dart';
-import 'package:blackjack_app/suits.dart';
+import 'package:blackjack_app/components/card.dart';
+import 'package:blackjack_app/components/card_template.dart';
+import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
