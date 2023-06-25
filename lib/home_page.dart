@@ -16,6 +16,8 @@ class _HomePageState extends State<HomePage>
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
 
+  List<Widget> hand = [];
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +40,15 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[900],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // デッキボタンが押されたときに新しいカードを手札に追加します。
+          setState(() {
+            hand.add(getRandomCard());
+          });
+        },
+        child: Icon(Icons.add),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,20 +74,24 @@ class _HomePageState extends State<HomePage>
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CardTemplate(
-                  color: Colors.red,
-                  number: '3',
-                  suit: diamond(),
-                ),
-                CardTemplate(
-                  color: Colors.black,
-                  number: 'K',
-                  suit: spade(),
-                ),
-                getFlippingCard("A", diamond(), Colors.red),
-              ],
+              children: hand,
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     CardTemplate(
+            //       color: Colors.red,
+            //       number: '3',
+            //       suit: diamond(),
+            //     ),
+            //     CardTemplate(
+            //       color: Colors.black,
+            //       number: 'K',
+            //       suit: spade(),
+            //     ),
+            //     getFlippingCard("A", diamond(), Colors.red),
+            // ],
+            // ),
           ],
         ),
       ),
@@ -110,6 +125,15 @@ class _HomePageState extends State<HomePage>
         //     suit: suit,
         //   ),
       ),
+    );
+  }
+
+  Widget getRandomCard() {
+    // ここではダミーのカードを返しますが、実際にはランダムなカードを返すように実装してください。
+    return CardTemplate(
+      color: Colors.red,
+      number: 'A',
+      suit: heart(),
     );
   }
 }
