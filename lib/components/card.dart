@@ -13,7 +13,7 @@ class CardBack extends StatelessWidget {
           color: Colors.white,
           height: 150,
           width: 100,
-          child: Image.asset('lib/images/trump_back.png'),
+          child: Image.asset('assets/images/trump_back.png'),
         ),
       ),
     );

@@ -40,14 +40,45 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[900],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // デッキボタンが押されたときに新しいカードを手札に追加します。
-          setState(() {
-            hand.add(getRandomCard());
-          });
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              // デッキボタンが押されたときに新しいカードを手札に追加します。
+              var newCard = getRandomCard();
+              setState(() {
+                hand.add(newCard);
+              });
+            },
+            child: Center(
+              child: Text(
+                'Hit',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              // ボタンが押されたときの処理をここに書きます。
+            },
+            backgroundColor: Colors.red,
+            child: Center(
+              child: Text(
+                'Stay',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -56,11 +87,7 @@ class _HomePageState extends State<HomePage>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CardTemplate(
-                  color: Colors.red,
-                  number: 'J',
-                  suit: heart(),
-                ),
+                getFlippingCard("A", diamond(), Colors.red),
                 CardTemplate(
                   color: Colors.black,
                   number: '10',
@@ -72,26 +99,16 @@ class _HomePageState extends State<HomePage>
               angle: 3.14 / 2,
               child: CardBack(),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: hand,
+            SizedBox(
+              height: 150,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: hand.length,
+                itemBuilder: (context, index) {
+                  return hand[index];
+                },
+              ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     CardTemplate(
-            //       color: Colors.red,
-            //       number: '3',
-            //       suit: diamond(),
-            //     ),
-            //     CardTemplate(
-            //       color: Colors.black,
-            //       number: 'K',
-            //       suit: spade(),
-            //     ),
-            //     getFlippingCard("A", diamond(), Colors.red),
-            // ],
-            // ),
           ],
         ),
       ),
