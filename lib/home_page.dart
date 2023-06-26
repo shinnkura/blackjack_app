@@ -33,9 +33,14 @@ class _HomePageState extends State<HomePage>
       ..addListener(() {
         setState(() {});
       })
-      ..addStatusListener((status) {
-        _animationStatus = status;
-      });
+      ..addStatusListener(
+        (status) {
+          _animationStatus = status;
+        },
+      );
+
+    hand.add(getRandomCard());
+    hand.add(getRandomCard());
   }
 
   @override
@@ -101,14 +106,20 @@ class _HomePageState extends State<HomePage>
               angle: 3.14 / 2,
               child: CardBack(),
             ),
-            SizedBox(
-              height: 150,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: hand.length,
-                itemBuilder: (context, index) {
-                  return hand[index];
-                },
+            Center(
+              child: SizedBox(
+                height: 150,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: hand.length,
+                    itemBuilder: (context, index) {
+                      return hand[index];
+                    },
+                  ),
+                ),
               ),
             ),
           ],
@@ -132,17 +143,12 @@ class _HomePageState extends State<HomePage>
           }
         },
         child: _animation.value <= 0.5
-            ? CardTemplate(
+            ? CardBack()
+            : CardTemplate(
                 color: color,
                 number: number,
                 suit: suit,
-              )
-            : CardBack(),
-        // : CardTemplate(
-        //     color: color,
-        //     number: number,
-        //     suit: suit,
-        //   ),
+              ),
       ),
     );
   }
