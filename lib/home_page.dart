@@ -3,6 +3,7 @@ import 'package:blackjack_app/components/card_template.dart';
 import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
 
+import 'utils/caluculate_hand_value.dart';
 import 'utils/get_random_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,6 +58,10 @@ class _HomePageState extends State<HomePage>
               setState(() {
                 hand.add(newCard);
               });
+              int handValue = calculateHandValue(hand);
+              if (handValue > 21) {
+                // The player has busted. Handle the loss.
+              }
             },
             child: Center(
               child: Text(
