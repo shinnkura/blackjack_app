@@ -3,6 +3,8 @@ import 'package:blackjack_app/components/card_template.dart';
 import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
 
+import 'utils/get_random_card.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -142,15 +144,6 @@ class _HomePageState extends State<HomePage>
         //     suit: suit,
         //   ),
       ),
-    );
-  }
-
-  Widget getRandomCard() {
-    // ここではダミーのカードを返しますが、実際にはランダムなカードを返すように実装してください。
-    return CardTemplate(
-      color: Colors.red,
-      number: 'A',
-      suit: heart(),
     );
   }
 }
