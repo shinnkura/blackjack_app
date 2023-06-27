@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage>
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('ゲームオーバー！'),
-                      content: Text('バストしました! あなたの合計は、$handTotalでした。'),
+                      content: Text('バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
                         TextButton(
                           child: Text('閉じる'),
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('おめでとう!'),
-            content: Text('ディーラーがバストしました。あなたの勝ちです!'),
+            content: Text('ディーラーがバストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
                 child: Text('閉じる'),
