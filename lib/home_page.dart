@@ -1,4 +1,4 @@
-import 'package:blackjack_app/components/card.dart';
+import 'package:blackjack_app/components/card_back.dart';
 import 'package:blackjack_app/components/card_template.dart';
 import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
