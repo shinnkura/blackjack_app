@@ -36315,8 +36315,8 @@ return A.X(null,r)}})
 return A.Y($async$$0,r)},
 $S:29}
 A.a0V.prototype={
-$1(a){var s=A.dC("Game Over",null),r=A.dC("You busted! Your total was "+this.a.x,null)
-return A.a6_(A.a([A.a7o(A.dC("Close",null),new A.a0T(a))],t.F),r,s)},
+$1(a){var s=A.dC("\u30b2\u30fc\u30e0\u30aa\u30fc\u30d0\u30fc\uff01",null),r=A.dC("\u30d0\u30b9\u30c8\u3057\u307e\u3057\u305f! \u3042\u306a\u305f\u306e\u5408\u8a08\u306f\u3001"+this.a.x+"\u3067\u3057\u305f\u3002",null)
+return A.a6_(A.a([A.a7o(A.dC("\u9589\u3058\u308b",null),new A.a0T(a))],t.F),r,s)},
 $S:55}
 A.a0T.prototype={
 $0(){A.lg(this.a,!1).dL()},
@@ -36341,15 +36341,15 @@ A.a1_.prototype={
 $2(a,b){return this.a.r[b].a},
 $S:81}
 A.a12.prototype={
-$1(a){var s=A.dC("Congratulations!",null),r=A.dC("Dealer busted! You win!",null)
-return A.a6_(A.a([A.a7o(A.dC("Close",null),new A.a11(a))],t.F),r,s)},
+$1(a){var s=A.dC("\u304a\u3081\u3067\u3068\u3046!",null),r=A.dC("\u30c7\u30a3\u30fc\u30e9\u30fc\u304c\u30d0\u30b9\u30c8\u3057\u307e\u3057\u305f\u3002\u3042\u306a\u305f\u306e\u52dd\u3061\u3067\u3059!",null)
+return A.a6_(A.a([A.a7o(A.dC("\u9589\u3058\u308b",null),new A.a11(a))],t.F),r,s)},
 $S:55}
 A.a11.prototype={
 $0(){A.lg(this.a,!1).dL()},
 $S:0}
 A.a13.prototype={
-$1(a){var s=A.dC("Congratulations!",null),r=A.dC("You win! Your total is higher than the dealer's.",null)
-return A.a6_(A.a([A.a7o(A.dC("Close",null),new A.a10(a))],t.F),r,s)},
+$1(a){var s=A.dC("\u304a\u3081\u3067\u3068\u3046!",null),r=A.dC("\u3042\u306a\u305f\u306e\u52dd\u3061\u3067\u3059\uff01 \u3042\u306a\u305f\u306f\u30c7\u30a3\u30fc\u30e9\u30fc\u3088\u308a\u3082\u826f\u3044\u624b\u672d\u3057\u305f\u3002",null)
+return A.a6_(A.a([A.a7o(A.dC("\u9589\u3058\u308b",null),new A.a10(a))],t.F),r,s)},
 $S:55}
 A.a10.prototype={
 $0(){A.lg(this.a,!1).dL()},
