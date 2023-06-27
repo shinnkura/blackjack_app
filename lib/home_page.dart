@@ -1,5 +1,4 @@
 import 'package:blackjack_app/components/card_back.dart';
-import 'package:blackjack_app/components/card_template.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/get_random_card_data.dart';
@@ -73,11 +72,11 @@ class _HomePageState extends State<HomePage>
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Game Over'),
-                      content: Text('You busted! Your total was $handTotal'),
+                      title: Text('ゲームオーバー！'),
+                      content: Text('バストしました! あなたの合計は、$handTotalでした。'),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Close'),
+                          child: Text('閉じる'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -186,11 +185,11 @@ class _HomePageState extends State<HomePage>
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Congratulations!'),
-            content: Text('Dealer busted! You win!'),
+            title: Text('おめでとう!'),
+            content: Text('ディーラーがバストしました。あなたの勝ちです!'),
             actions: <Widget>[
               TextButton(
-                child: Text('Close'),
+                child: Text('閉じる'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -204,11 +203,11 @@ class _HomePageState extends State<HomePage>
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Congratulations!'),
-            content: Text('You win! Your total is higher than the dealer\'s.'),
+            title: Text('おめでとう!'),
+            content: Text('あなたの勝ちです！ あなたはディーラーよりも良い手札した。'),
             actions: <Widget>[
               TextButton(
-                child: Text('Close'),
+                child: Text('閉じる'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
