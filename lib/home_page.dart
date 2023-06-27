@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>
           children: [
             Center(
               child: SizedBox(
-                height: 150,
+                height: 170,
                 child: Align(
                   alignment: Alignment.center,
                   child: ListView.builder(
@@ -131,7 +131,11 @@ class _HomePageState extends State<HomePage>
                     scrollDirection: Axis.horizontal,
                     itemCount: dealerHand.length,
                     itemBuilder: (context, index) {
-                      return dealerHand[index].cardWidget;
+                      if (index == 0) {
+                        return CardBack(); // ディーラーの最初のカードを裏向きに表示
+                      } else {
+                        return dealerHand[index].cardWidget; // その他のカードは通常通り表示
+                      }
                     },
                   ),
                 ),
@@ -143,7 +147,7 @@ class _HomePageState extends State<HomePage>
             ),
             Center(
               child: SizedBox(
-                height: 150,
+                height: 170,
                 child: Align(
                   alignment: Alignment.center,
                   child: ListView.builder(
