@@ -71,12 +71,16 @@ class _HomePageState extends State<HomePage>
                 hand.add(newCard);
               });
               if (handTotal > 21) {
-                showDialog(
+                setState(() {
+                  isDealerTurn = true;
+                });
+                await showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('ゲームオーバー！'),
-                      content: Text('バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+                      content: Text(
+                          'バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
                         TextButton(
                           child: Text('閉じる'),
@@ -116,8 +120,35 @@ class _HomePageState extends State<HomePage>
             onPressed: () {
               setState(() {
                 isDealerTurn = true;
-                dealerTurn();
               });
+              dealerTurn();
+              if (handTotal > 21) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('ゲームオーバー！'),
+                      content: Text(
+                          'バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('閉じる'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: Text('リプレイ'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            resetGame();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             backgroundColor: Colors.red,
             child: Center(
@@ -196,7 +227,8 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('おめでとう!'),
-            content: Text('ディーラーがバストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+            content: Text(
+                'ディーラーがバストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
                 child: Text('閉じる'),
@@ -221,7 +253,8 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('おめでとう!'),
-            content: Text('あなたの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+            content: Text(
+                'あなたの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
                 child: Text('閉じる'),
