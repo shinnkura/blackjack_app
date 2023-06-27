@@ -1,6 +1,5 @@
 import 'package:blackjack_app/components/card_back.dart';
 import 'package:blackjack_app/components/card_template.dart';
-import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/get_random_card_data.dart';
@@ -49,11 +48,11 @@ class _HomePageState extends State<HomePage>
     hand.add(card1);
     hand.add(card2);
 
-    var dealerCard1 = getRandomCardData(); // ディーラーの初期カードをランダムに生成
-    var dealerCard2 = getRandomCardData(); // ディーラーの初期カードをランダムに生成
-    dealerHandTotal += dealerCard1.value + dealerCard2.value; // ディーラーの手札の合計を計算
-    dealerHand.add(dealerCard1); // ディーラーの手札にカードを追加
-    dealerHand.add(dealerCard2); // ディーラーの手札にカードを追加
+    var dealerCard1 = getRandomCardData();
+    var dealerCard2 = getRandomCardData();
+    dealerHandTotal += dealerCard1.value + dealerCard2.value;
+    dealerHand.add(dealerCard1);
+    dealerHand.add(dealerCard2);
   }
 
   @override
@@ -65,8 +64,7 @@ class _HomePageState extends State<HomePage>
         children: [
           FloatingActionButton(
             onPressed: () async {
-              var newCard =
-                  getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
+              var newCard = getRandomCardData();
               handTotal += newCard.value;
               if (handTotal > 21) {
                 showDialog(
@@ -139,17 +137,6 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     getFlippingCard("A", diamond(), Colors.red),
-            //     CardTemplate(
-            //       color: Colors.black,
-            //       number: '10',
-            //       suit: club(),
-            //     ),
-            //   ],
-            // ),
             Transform.rotate(
               angle: 3.14 / 2,
               child: CardBack(),
@@ -164,8 +151,7 @@ class _HomePageState extends State<HomePage>
                     scrollDirection: Axis.horizontal,
                     itemCount: hand.length,
                     itemBuilder: (context, index) {
-                      return hand[index]
-                          .cardWidget; // hand[index] を hand[index].cardWidget に変更してください。
+                      return hand[index].cardWidget;
                     },
                   ),
                 ),
