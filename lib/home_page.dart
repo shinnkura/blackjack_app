@@ -3,8 +3,7 @@ import 'package:blackjack_app/components/card_template.dart';
 import 'package:blackjack_app/utils/suits.dart';
 import 'package:flutter/material.dart';
 
-// import 'utils/caluculate_hand_value.dart';
-import 'utils/get_random_card.dart';
+import 'utils/get_random_card_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +18,9 @@ class _HomePageState extends State<HomePage>
   late Animation<double> _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
 
-  List<Widget> hand = [];
+  List<CardData> hand = [];
+
+  int handTotal = 0;
 
   @override
   void initState() {
@@ -40,8 +41,13 @@ class _HomePageState extends State<HomePage>
         },
       );
 
-    hand.add(getRandomCard());
-    hand.add(getRandomCard());
+    var card1 =
+        getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
+    var card2 =
+        getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
+    handTotal += card1.value + card2.value;
+    hand.add(card1);
+    hand.add(card2);
   }
 
   @override
@@ -53,15 +59,32 @@ class _HomePageState extends State<HomePage>
         children: [
           FloatingActionButton(
             onPressed: () async {
-              // デッキボタンが押されたときに新しいカードを手札に追加します。
-              var newCard = getRandomCard();
-              setState(() {
-                hand.add(newCard);
-              });
-              // int handValue = calculateHandValue(hand);
-              // if (handValue > 21) {
-              // The player has busted. Handle the loss.
-              // }
+              var newCard =
+                  getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
+              handTotal += newCard.value;
+              if (handTotal > 21) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Game Over'),
+                      content: Text('You busted! Your total was $handTotal'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                setState(() {
+                  hand.add(newCard);
+                });
+              }
             },
             child: Center(
               child: Text(
@@ -75,9 +98,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           FloatingActionButton(
-            onPressed: () {
-              // ボタンが押されたときの処理をここに書きます。
-            },
+            onPressed: () {},
             backgroundColor: Colors.red,
             child: Center(
               child: Text(
@@ -121,7 +142,8 @@ class _HomePageState extends State<HomePage>
                     scrollDirection: Axis.horizontal,
                     itemCount: hand.length,
                     itemBuilder: (context, index) {
-                      return hand[index];
+                      return hand[index]
+                          .cardWidget; // hand[index] を hand[index].cardWidget に変更してください。
                     },
                   ),
                 ),

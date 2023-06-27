@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import '../components/card_template.dart';
 import 'suits.dart';
 
-Widget getRandomCard() {
-  // カードの数値とスートのリストを定義します。
+class CardData {
+  final Widget cardWidget;
+  final int value;
+
+  CardData({required this.cardWidget, required this.value});
+}
+
+CardData getRandomCardData() {
   List<String> numbers = [
     'A',
     '2',
@@ -24,17 +30,26 @@ Widget getRandomCard() {
   ];
   List<Widget Function()> suits = [heart, diamond, club, spade];
 
-  // ランダムな数値とスートを選択します。
   var random = Random();
   String randomNum = numbers[random.nextInt(numbers.length)];
   var randomSuit = suits[random.nextInt(suits.length)];
 
-  // ランダムなカードを返します。
-  return CardTemplate(
+  int value;
+  if (randomNum == 'A') {
+    value = 1; // or 11 depending on your game rules
+  } else if (randomNum == 'J' || randomNum == 'Q' || randomNum == 'K') {
+    value = 10;
+  } else {
+    value = int.parse(randomNum);
+  }
+
+  Widget cardWidget = CardTemplate(
     color: (randomSuit == heart || randomSuit == diamond)
         ? Colors.red
         : Colors.black,
     number: randomNum,
     suit: randomSuit(),
   );
+
+  return CardData(cardWidget: cardWidget, value: value);
 }
