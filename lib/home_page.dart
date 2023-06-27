@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage>
   int handTotal = 0;
   int dealerHandTotal = 0;
 
+  bool isDealerTurn = false; // Add this line
+
   @override
   void initState() {
     super.initState();
@@ -102,7 +104,12 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                isDealerTurn = true;
+                dealerTurn();
+              });
+            },
             backgroundColor: Colors.red,
             child: Center(
               child: Text(
@@ -131,10 +138,10 @@ class _HomePageState extends State<HomePage>
                     scrollDirection: Axis.horizontal,
                     itemCount: dealerHand.length,
                     itemBuilder: (context, index) {
-                      if (index == 0) {
-                        return CardBack(); // ディーラーの最初のカードを裏向きに表示
+                      if (index == 0 && !isDealerTurn) {
+                        return CardBack();
                       } else {
-                        return dealerHand[index].cardWidget; // その他のカードは通常通り表示
+                        return dealerHand[index].cardWidget;
                       }
                     },
                   ),
@@ -167,28 +174,78 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget getFlippingCard(var number, var suit, var color) {
-    return Transform(
-      alignment: FractionalOffset.center,
-      transform: Matrix4.identity()
-        ..setEntry(3, 2, 0.001)
-        ..rotateY(3.14 * _animation.value),
-      child: GestureDetector(
-        onTap: () {
-          if (_animationStatus == AnimationStatus.dismissed) {
-            _animationController.forward();
-          } else {
-            _animationController.reverse();
-          }
-        },
-        child: _animation.value <= 0.5
-            ? CardBack()
-            : CardTemplate(
-                color: color,
-                number: number,
-                suit: suit,
+  void dealerTurn() {
+    while (dealerHandTotal < 17) {
+      var newCard = getRandomCardData();
+      dealerHandTotal += newCard.value;
+      dealerHand.add(newCard);
+    }
+
+    if (dealerHandTotal > 21) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Congratulations!'),
+            content: Text('Dealer busted! You win!'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-      ),
-    );
+            ],
+          );
+        },
+      );
+    } else if (handTotal > dealerHandTotal) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Congratulations!'),
+            content: Text('You win! Your total is higher than the dealer\'s.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    setState(() {
+      // This will trigger a rebuild and show the dealer's cards
+    });
   }
+
+  // Widget getFlippingCard(var number, var suit, var color) {
+  //   return Transform(
+  //     alignment: FractionalOffset.center,
+  //     transform: Matrix4.identity()
+  //       ..setEntry(3, 2, 0.001)
+  //       ..rotateY(3.14 * _animation.value),
+  //     child: GestureDetector(
+  //       onTap: () {
+  //         if (_animationStatus == AnimationStatus.dismissed) {
+  //           _animationController.forward();
+  //         } else {
+  //           _animationController.reverse();
+  //         }
+  //       },
+  //       child: _animation.value <= 0.5
+  //           ? CardBack()
+  //           : CardTemplate(
+  //               color: color,
+  //               number: number,
+  //               suit: suit,
+  //             ),
+  //     ),
+  //   );
+  // }
 }
