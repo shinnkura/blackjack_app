@@ -19,8 +19,10 @@ class _HomePageState extends State<HomePage>
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
 
   List<CardData> hand = [];
+  List<CardData> dealerHand = [];
 
   int handTotal = 0;
+  int dealerHandTotal = 0;
 
   @override
   void initState() {
@@ -41,13 +43,17 @@ class _HomePageState extends State<HomePage>
         },
       );
 
-    var card1 =
-        getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
-    var card2 =
-        getRandomCardData(); // getRandomCard() を getRandomCardData() に変更してください。
+    var card1 = getRandomCardData();
+    var card2 = getRandomCardData();
     handTotal += card1.value + card2.value;
     hand.add(card1);
     hand.add(card2);
+
+    var dealerCard1 = getRandomCardData(); // ディーラーの初期カードをランダムに生成
+    var dealerCard2 = getRandomCardData(); // ディーラーの初期カードをランダムに生成
+    dealerHandTotal += dealerCard1.value + dealerCard2.value; // ディーラーの手札の合計を計算
+    dealerHand.add(dealerCard1); // ディーラーの手札にカードを追加
+    dealerHand.add(dealerCard2); // ディーラーの手札にカードを追加
   }
 
   @override
@@ -117,17 +123,33 @@ class _HomePageState extends State<HomePage>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                getFlippingCard("A", diamond(), Colors.red),
-                CardTemplate(
-                  color: Colors.black,
-                  number: '10',
-                  suit: club(),
+            Center(
+              child: SizedBox(
+                height: 150,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dealerHand.length,
+                    itemBuilder: (context, index) {
+                      return dealerHand[index].cardWidget;
+                    },
+                  ),
                 ),
-              ],
+              ),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     getFlippingCard("A", diamond(), Colors.red),
+            //     CardTemplate(
+            //       color: Colors.black,
+            //       number: '10',
+            //       suit: club(),
+            //     ),
+            //   ],
+            // ),
             Transform.rotate(
               angle: 3.14 / 2,
               child: CardBack(),
