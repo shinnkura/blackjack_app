@@ -67,6 +67,9 @@ class _HomePageState extends State<HomePage>
             onPressed: () async {
               var newCard = getRandomCardData();
               handTotal += newCard.value;
+              setState(() {
+                hand.add(newCard);
+              });
               if (handTotal > 21) {
                 showDialog(
                   context: context,
