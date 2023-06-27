@@ -84,6 +84,13 @@ class _HomePageState extends State<HomePage>
                             Navigator.of(context).pop();
                           },
                         ),
+                        TextButton(
+                          child: Text('リプレイ'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            resetGame();
+                          },
+                        ),
                       ],
                     );
                   },
@@ -197,6 +204,13 @@ class _HomePageState extends State<HomePage>
                   Navigator.of(context).pop();
                 },
               ),
+              TextButton(
+                child: Text('リプレイ'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  resetGame();
+                },
+              ),
             ],
           );
         },
@@ -207,12 +221,45 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('おめでとう!'),
-            content: Text('あなたの勝ちです！ あなたはディーラーよりも良い手札した。'),
+            content: Text('あなたの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
                 child: Text('閉じる'),
                 onPressed: () {
                   Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('リプレイ'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  resetGame();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else if (dealerHandTotal > handTotal) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('ゲームオーバー！'),
+            content: Text(
+                'ディーラーの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('閉じる'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('リプレイ'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  resetGame();
                 },
               ),
             ],
@@ -223,6 +270,28 @@ class _HomePageState extends State<HomePage>
 
     setState(() {
       // This will trigger a rebuild and show the dealer's cards
+    });
+  }
+
+  void resetGame() {
+    setState(() {
+      hand = [];
+      dealerHand = [];
+      handTotal = 0;
+      dealerHandTotal = 0;
+      isDealerTurn = false;
+
+      var card1 = getRandomCardData();
+      var card2 = getRandomCardData();
+      handTotal += card1.value + card2.value;
+      hand.add(card1);
+      hand.add(card2);
+
+      var dealerCard1 = getRandomCardData();
+      var dealerCard2 = getRandomCardData();
+      dealerHandTotal += dealerCard1.value + dealerCard2.value;
+      dealerHand.add(dealerCard1);
+      dealerHand.add(dealerCard2);
     });
   }
 
