@@ -12,7 +12,15 @@ class CardData {
   CardData({required this.cardWidget, required this.value});
 }
 
-CardData getRandomCardData() {
+CardData getRandomCardData(List<CardData> allCards) {
+  var random = Random();
+  int index = random.nextInt(allCards.length);
+  CardData card = allCards[index];
+  allCards.removeAt(index);
+  return card;
+}
+
+List<CardData> generateAllCards() {
   List<String> numbers = [
     'A',
     '2',
@@ -30,26 +38,28 @@ CardData getRandomCardData() {
   ];
   List<Widget Function()> suits = [heart, diamond, club, spade];
 
-  var random = Random();
-  String randomNum = numbers[random.nextInt(numbers.length)];
-  var randomSuit = suits[random.nextInt(suits.length)];
+  List<CardData> allCards = [];
 
-  int value;
-  if (randomNum == 'A') {
-    value = 1; // or 11 depending on your game rules
-  } else if (randomNum == 'J' || randomNum == 'Q' || randomNum == 'K') {
-    value = 10;
-  } else {
-    value = int.parse(randomNum);
+  for (var number in numbers) {
+    for (var suit in suits) {
+      int value;
+      if (number == 'A') {
+        value = 1; // or 11 depending on your game rules
+      } else if (number == 'J' || number == 'Q' || number == 'K') {
+        value = 10;
+      } else {
+        value = int.parse(number);
+      }
+
+      Widget cardWidget = CardTemplate(
+        color: (suit == heart || suit == diamond) ? Colors.red : Colors.black,
+        number: number,
+        suit: suit(),
+      );
+
+      allCards.add(CardData(cardWidget: cardWidget, value: value));
+    }
   }
 
-  Widget cardWidget = CardTemplate(
-    color: (randomSuit == heart || randomSuit == diamond)
-        ? Colors.red
-        : Colors.black,
-    number: randomNum,
-    suit: randomSuit(),
-  );
-
-  return CardData(cardWidget: cardWidget, value: value);
+  return allCards;
 }

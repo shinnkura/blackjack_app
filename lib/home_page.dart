@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage>
 
   List<CardData> hand = [];
   List<CardData> dealerHand = [];
+  List<CardData> allCards = []; // Add this line
 
   int handTotal = 0;
   int dealerHandTotal = 0;
@@ -43,14 +44,15 @@ class _HomePageState extends State<HomePage>
         },
       );
 
-    var card1 = getRandomCardData();
-    var card2 = getRandomCardData();
+    allCards = generateAllCards();
+    var card1 = getRandomCardData(allCards);
+    var card2 = getRandomCardData(allCards);
     handTotal += card1.value + card2.value;
     hand.add(card1);
     hand.add(card2);
 
-    var dealerCard1 = getRandomCardData();
-    var dealerCard2 = getRandomCardData();
+    var dealerCard1 = getRandomCardData(allCards);
+    var dealerCard2 = getRandomCardData(allCards);
     dealerHandTotal += dealerCard1.value + dealerCard2.value;
     dealerHand.add(dealerCard1);
     dealerHand.add(dealerCard2);
@@ -65,7 +67,8 @@ class _HomePageState extends State<HomePage>
         children: [
           FloatingActionButton(
             onPressed: () async {
-              var newCard = getRandomCardData();
+              // var newCard = getRandomCardData();
+              var newCard = getRandomCardData(allCards);
               handTotal += newCard.value;
               setState(() {
                 hand.add(newCard);
@@ -217,7 +220,8 @@ class _HomePageState extends State<HomePage>
 
   void dealerTurn() {
     while (dealerHandTotal < 17) {
-      var newCard = getRandomCardData();
+      // var newCard = getRandomCardData();
+      var newCard = getRandomCardData(allCards);
       dealerHandTotal += newCard.value;
       dealerHand.add(newCard);
     }
@@ -315,14 +319,15 @@ class _HomePageState extends State<HomePage>
       dealerHandTotal = 0;
       isDealerTurn = false;
 
-      var card1 = getRandomCardData();
-      var card2 = getRandomCardData();
+      allCards = generateAllCards(); // Add this line
+      var card1 = getRandomCardData(allCards);
+      var card2 = getRandomCardData(allCards);
       handTotal += card1.value + card2.value;
       hand.add(card1);
       hand.add(card2);
 
-      var dealerCard1 = getRandomCardData();
-      var dealerCard2 = getRandomCardData();
+      var dealerCard1 = getRandomCardData(allCards);
+      var dealerCard2 = getRandomCardData(allCards);
       dealerHandTotal += dealerCard1.value + dealerCard2.value;
       dealerHand.add(dealerCard1);
       dealerHand.add(dealerCard2);
