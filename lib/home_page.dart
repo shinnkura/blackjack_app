@@ -99,11 +99,12 @@ class _HomePageState extends State<HomePage>
                     );
                   },
                 );
-              } else {
-                setState(() {
-                  hand.add(newCard);
-                });
               }
+              // else {
+              //   setState(() {
+              //     hand.add(newCard);
+              //   });
+              // }
             },
             child: Center(
               child: Text(
