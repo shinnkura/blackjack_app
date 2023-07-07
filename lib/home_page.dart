@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage>
                     return AlertDialog(
                       title: Text('ゲームオーバー！'),
                       content: Text(
-                          'バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+                          'バーストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
                         TextButton(
                           child: Text('閉じる'),
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage>
                     return AlertDialog(
                       title: Text('ゲームオーバー！'),
                       content: Text(
-                          'バストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+                          'バーストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
                         TextButton(
                           child: Text('閉じる'),
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage>
           return AlertDialog(
             title: Text('おめでとう!'),
             content: Text(
-                'ディーラーがバストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
+                'ディーラーがバーストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
                 child: Text('閉じる'),
