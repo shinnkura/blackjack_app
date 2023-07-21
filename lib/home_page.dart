@@ -86,12 +86,6 @@ class _HomePageState extends State<HomePage>
                           'バーストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('閉じる'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        TextButton(
                           child: Text('リプレイ'),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -103,11 +97,6 @@ class _HomePageState extends State<HomePage>
                   },
                 );
               }
-              // else {
-              //   setState(() {
-              //     hand.add(newCard);
-              //   });
-              // }
             },
             child: Center(
               child: Text(
@@ -135,12 +124,6 @@ class _HomePageState extends State<HomePage>
                       content: Text(
                           'バーストしました! あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
                       actions: <Widget>[
-                        TextButton(
-                          child: Text('閉じる'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
                         TextButton(
                           child: Text('リプレイ'),
                           onPressed: () {
@@ -236,12 +219,6 @@ class _HomePageState extends State<HomePage>
                 'ディーラーがバーストしました！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
-                child: Text('閉じる'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
                 child: Text('リプレイ'),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -262,12 +239,6 @@ class _HomePageState extends State<HomePage>
                 'あなたの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
               TextButton(
-                child: Text('閉じる'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
                 child: Text('リプレイ'),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -287,12 +258,6 @@ class _HomePageState extends State<HomePage>
             content: Text(
                 'ディーラーの勝ちです！ あなたのスコアは $handTotal, ディーラーのスコアは $dealerHandTotal でした。'),
             actions: <Widget>[
-              TextButton(
-                child: Text('閉じる'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
               TextButton(
                 child: Text('リプレイ'),
                 onPressed: () {
@@ -333,29 +298,4 @@ class _HomePageState extends State<HomePage>
       dealerHand.add(dealerCard2);
     });
   }
-
-  // Widget getFlippingCard(var number, var suit, var color) {
-  //   return Transform(
-  //     alignment: FractionalOffset.center,
-  //     transform: Matrix4.identity()
-  //       ..setEntry(3, 2, 0.001)
-  //       ..rotateY(3.14 * _animation.value),
-  //     child: GestureDetector(
-  //       onTap: () {
-  //         if (_animationStatus == AnimationStatus.dismissed) {
-  //           _animationController.forward();
-  //         } else {
-  //           _animationController.reverse();
-  //         }
-  //       },
-  //       child: _animation.value <= 0.5
-  //           ? CardBack()
-  //           : CardTemplate(
-  //               color: color,
-  //               number: number,
-  //               suit: suit,
-  //             ),
-  //     ),
-  //   );
-  // }
 }
